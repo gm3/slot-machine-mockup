@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Slot Machine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="slot-machine">
+        <div class="reels-container">
+            <div class="reel" id="reel1"></div>
+            <div class="reel" id="reel2"></div>
+            <div class="reel" id="reel3"></div>
+            <div class="reel" id="reel4"></div>
+            <div class="reel" id="reel5"></div>
+        </div>
+        <div class="stats-bar">
+            <div class="stat">Credits: <span id="creditsDisplay">0</span></div>
+            <button id="spinButton">Spin</button>
+            <div class="stat">Points: <span id="pointsDisplay">0</span></div>
+        </div>
+    </div>
+    <div class="debug-controls">
+        <label>
+            <input type="checkbox" id="debugCheckbox"> Debug Mode (Use First 5 Symbols)
+        </label>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html> 

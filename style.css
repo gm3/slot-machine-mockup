@@ -1,0 +1,161 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Critical for full screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000; /* Dark background for the page */
+    font-family: Arial, sans-serif;
+}
+
+.slot-machine {
+    /* --slot-size will be set by JS, e.g., 80px */
+    width: 80vmin;   
+    height: 80vmin;  
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center .reels-container and .stats-bar if they are narrower than .slot-machine */
+    justify-content: center; /* Vertically center content if .slot-machine is taller than combined content */
+    background-color: #000000; 
+    padding: 15px; 
+    box-sizing: border-box; 
+    border-radius: 10px; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+}
+
+.reels-container {
+    display: flex;
+    justify-content: center; /* Center reels within the container */
+    border: 5px solid rgb(0, 255, 21);
+    background-color: #111; 
+    overflow: hidden; 
+    /* width: 100%; --- REMOVED, width will be implicit from content or JS if needed --- */
+    /* Height will be set by JS */
+    margin-bottom: 15px; 
+    box-sizing: border-box;
+}
+
+.reel {
+    width: var(--slot-size, 70px); /* Fallback just in case, actual value from JS */
+    height: 100%; 
+    background-color: #000000; 
+    margin: 0 2px; 
+    /* border: 1px solid #00db0b; */
+    overflow: hidden; 
+    position: relative;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.reel .slot-symbol {
+    width: var(--slot-size, 70px); /* Fallback just in case, actual value from JS */
+    height: var(--slot-size, 70px); /* Fallback just in case, actual value from JS */
+    /* aspect-ratio: 1 / 1; --- REMOVED --- */
+    box-sizing: border-box;
+    /*border: 1px solid red; DEBUG BORDER */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    background-color: #000000; 
+}
+
+.reel .slot-symbol img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    display: block; 
+}
+
+/* Ensure this is updated if you change the class name in HTML from .emoji */
+.reel .emoji-strip .emoji { /* If old .emoji class is still on strip children by mistake */
+    /* This rule is now ideally deprecated in favor of .slot-symbol directly on children */
+}
+
+.reel .emoji {
+    font-size: 60px;
+    line-height: 120px; /* Vertically center emoji text if it's smaller */
+    text-align: center;
+    height: 120px;      /* Each emoji slot is 120px tall */
+    width: 100%;        /* Emoji div takes full width of strip */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Make emojis visible on dark background if they are text-based */
+}
+
+.reel .emoji {
+    /* ... other existing styles like font-size, height, etc. ... */
+    border: 1px solid red; /* --- DEBUG BORDER --- */
+    color: white; /* Ensures emoji text is visible if it's not an image */
+    box-sizing: border-box; /* Important for border not adding to size */
+}
+
+.stats-bar {
+    width: 100%; /* Fill available width within .slot-machine padding */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #1c1c1c; /* Darker than slot-machine, lighter than page */
+    border-radius: 8px;
+    box-sizing: border-box;
+    flex-shrink: 0; /* Prevent stats bar from shrinking */
+    color: white;
+}
+
+.stats-bar .stat {
+    font-size: 1.2em;
+    padding: 0 10px; /* Add some padding to stat elements */
+}
+
+#spinButton {
+    padding: 12px 25px;
+    font-size: 1.3em;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgb(0, 255, 76);
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+#spinButton:hover {
+    background-color: #91ff00; /* Brighter gold */
+}
+
+#spinButton:active {
+    transform: scale(0.95);
+}
+
+#spinButton:disabled {
+    background-color: #555;
+    color: #888;
+    cursor: not-allowed;
+    transform: scale(1);
+}
+
+/* Keyframes for spinReel are not actively used by current JS */
+/* but can be kept for future animation ideas if needed */
+@keyframes spinReel {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10000px); } /* Large value for continuous illusion */
+}
+
+.reel.spinning .emoji-strip {
+    /* This class is not actively used with the current JS approach */
+    /* but can be used if we switch to a purely CSS keyframe animation for spinning */
+    /* animation: spinReel 1s linear infinite; */
+}
+
+.slot-symbol .win-highlight {
+    background-color: rgba(41, 231, 3, 0.863);
+    box-shadow: 0 0 15px 10px rgb(49, 245, 0);
+    border-radius: 20px;
+}
